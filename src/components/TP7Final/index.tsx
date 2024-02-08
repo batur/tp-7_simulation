@@ -3,12 +3,14 @@ import React from "react";
 import Base from "./base";
 import Rotator from "./rotator";
 import Rewind from "./rewind";
+import JackAdapter from "./jackAdapter";
 
 const TP7Final: React.FC = () => {
   const [isRecording, setIsRecording] = React.useState(false);
   const [isPlaying, setIsPlaying] = React.useState(false);
   const [isStopped, setIsStopped] = React.useState(false);
   const [isRewinding, setIsRewinding] = React.useState(false);
+  const [hasAdapter, setHasAdapter] = React.useState(false);
   const [rewindDirection, setRewindDirection] = React.useState<
     "up" | "down" | null
   >(null);
@@ -49,6 +51,10 @@ const TP7Final: React.FC = () => {
     setIsPlaying(true);
   };
 
+  const handleAdapter = () => {
+    setHasAdapter((prev) => !prev);
+  };
+
   return (
     <div
       style={{
@@ -69,6 +75,7 @@ const TP7Final: React.FC = () => {
         rewinder={
           <Rewind isRewinding={isRewinding} rewindDirection={rewindDirection} />
         }
+        jackAdapter={<JackAdapter />}
       />
       <button className="button-base button-control-rotator" />
       <button className="button-base button-control-knob" />
@@ -92,6 +99,10 @@ const TP7Final: React.FC = () => {
       <button
         className="button-base button-control-right"
         onClick={handleStop}
+      />
+      <button
+        className="button-base button-control-adapter"
+        onClick={handleAdapter}
       />
       <button className="button-base button-control-volume-up button-control-round" />
       <button className="button-base button-control-volume-down button-control-round" />
